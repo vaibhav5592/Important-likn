@@ -1,0 +1,304 @@
+Phone No validation
+https://stackoverflow.com/questions/469357/html-text-input-allows-only-numeric-input
+
+
+CI Example
+https://www.formget.com/update-data-in-database-using-codeigniter/
+http://blog.chapagain.com.np/codeigniter-simple-mvc-crud-add-edit-delete-view/
+
+class example in php
+http://www.phpgurukul.com/how-to-insert-data-in-databse-using-php-oopc-concept/
+
+AJAX
+
+http://www.tizag.com/ajaxTutorial/ajax-javascript.php
+
+CSS FOR Nth CHild
+
+https://css-tricks.com/useful-nth-child-recipies/
+
+
+Wordpress Function
+
+https://codex.wordpress.org/Function_Reference
+
+programm
+
+http://www.phpgurukul.com/php-programming-logical-interview-questions-answers/
+
+Array
+http://php.net/manual/en/language.types.array.php
+
+logical Condition 
+
+https://www.tutorialspoint.com/javascript/javascript_operators.htm
+
+For js
+
+https://developer.mozilla.org/en-US/docs/Web/API/Document
+
+For register Menu
+
+http://www.wpbeginner.com/wp-themes/how-to-add-custom-navigation-menus-in-wordpress-3-0-themes/F
+
+https://wisdmlabs.com/blog/how-to-create-a-simple-and-dynamic-navigation-menu-in-wordpress/
+
+
+For Logo Title And Discription
+
+https://kwight.ca/2012/12/02/adding-a-logo-uploader-to-your-wordpress-site-with-the-theme-customizer/
+
+
+https://codex.wordpress.org/Plugin_API
+
+1.All in One SEO WordPress Plugin
+http://www.shoutmeloud.com/wordpress-seo-plugin-all-in-one-seo-plugin.html
+
+https://semperplugins.com/documentation/filter-to-change-canonical-url-protocol/
+https://semperplugins.com/documentation/
+http://www.wpbeginner.com/plugins/users-guide-for-all-in-one-seo-pack/
+
+Create A Custom Theme
+https://themeshaper.com/2012/11/06/the-wordpress-theme-search-template-and-page-template/
+
+Create a custom widgets
+
+http://devotepress.com/tutorials-hacks/wordpress-coding/how-to-register-sidebars-in-wordpress/
+
+
+google analitic setup
+
+ID - lindasagar187
+PWS - lindasagar@187
+Tracking ID - UA-87113520-1
+
+Script-
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-87113520-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+  Tag Manager 
+
+
+Setup Account
+Account Name
+Solve For Why
+Share data anonymously with Google and others
+2
+Setup Container
+Container name - www.solveforwhy.xyz
+Where to Use Container
+Web
+container id - GTM-56MJBZ 
+
+
+
+For Header
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-56MJBZ');</script>
+<!-- End Google Tag Manager -->
+
+
+For Body
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-56MJBZ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) --> 
+
+
+
+Theme intregation
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+<?php
+/*For Navigation Bar*/
+register_nav_menus(array(
+    'primary' => __('Primary Menu', 'menu1'),
+    'secondary' => __('Secondary Menu','menu2')
+));
+/*For Logo and Title*/
+function themeslug_theme_customizer( $wp_customize ) {
+    // Fun code will go here
+    $wp_customize->add_section( 'themeslug_logo_section' , array(
+    'title'       => __( 'Logo', 'themeslug' ),
+    'priority'    => 30,
+    'description' => 'Upload a logo to replace the default site name and description in the header',
+) );
+    $wp_customize->add_setting( 'themeslug_logo' );
+    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'themeslug_logo', array(
+    'label'    => __( 'Logo', 'themeslug' ),
+    'section'  => 'themeslug_logo_section',
+    'settings' => 'themeslug_logo',
+) ) );
+}
+add_action( 'customize_register', 'themeslug_theme_customizer' );
+/*For Side Bar*/
+register_sidebars( 3, array( 'name' => 'sidebar %d' ) );
+/*call side bar <?php dynamic_sidebar(sidebar 2); ?>*/
+
+//Start function of Style and Js file
+function phoenix_scripts(){
+
+    wp_enqueue_style( 'style', get_template_directory_uri() . '/style.css', array());
+    wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.css', array());
+    wp_enqueue_style( 'smoothbox', get_template_directory_uri() . '/css/smoothbox.css', array());
+
+    wp_enqueue_script( 'jquery.min', get_template_directory_uri() . '/js/jquery.min.js', array());
+    
+
+}
+add_action("wp_enqueue_scripts","phoenix_scripts");
+//end of function Style and Js file
+
+
+
+class P_menu_walker extends Walker_Nav_Menu {
+  function start_lvl(&$output, $depth) {
+    $indent = str_repeat("\t", $depth);
+    $output .= "\n$indent<ul class=\"dropdown-menu\">\n";
+  }
+}
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Light Box For Image Plugin
+https://github.com/noelboss/featherlight/#usage
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Link for Search with jquery
+1. http://www.jqueryscript.net/tags.php?/Portfolio/
+2. http://www.jqueryscript.net/layout/Responsive-Filterable-jQuery-Portfolio-Gallery-Plugin-Elastic-Grid.html
+3. http://www.jqueryscript.net/demo/Responsive-Filterable-jQuery-Portfolio-Gallery-Plugin-Elastic-Grid/demo_responsive.html
+
+@#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Custom Field
+
+  add_action( 'add_meta_boxes', 'cd_meta_box_add' );
+function cd_meta_box_add()
+{
+   add_meta_box( 'my-meta-box-id', 'Video Link', 'cd_meta_box_cb', 'portfolio', 'normal', 'high' );
+}
+/* call meta box content "echo get_post_meta(102,'new_meta',TRUE);"*/
+/*FIRST*/
+function cd_meta_box_cb( $post )
+{ ?>
+<p>
+    <textarea name="my_meta_box_text" id="my_meta_box_text"><?php echo get_post_meta($post->ID,'new_meta',TRUE); ?></textarea>    
+        </p>
+    <?php       
+}
+function saving_metas($post_id){
+    $value = $_POST["my_meta_box_text"];
+    update_post_meta($post_id,"new_meta",$value);
+}
+add_action('save_post_portfolio',"saving_metas");
+}
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+<?php 
+$args = array('post_type' => 'our_services');
+$the_query = new WP_Query( $args ); ?>
+
+<?php if ( $the_query->have_posts() ) : ?>
+  <?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+  						<div class="service-inner">
+							<div class="col-md-4 col-sm-6">
+								<div class="sevice-content-bx">
+									<div class="service-img-bx">
+										<a href="<?php echo get_the_permalink();?>"><?php echo get_the_post_thumbnail();?></a>
+									</div>	
+									<div class="service-in-content">
+										<h2><?php echo get_the_title();?></h2>
+										<p><?php echo get_the_excerpt();?></p>
+									</div>
+								</div>
+							</div>
+						</div>
+  <?php endwhile; ?>
+  <!-- end of the loop -->
+    <?php wp_reset_postdata(); ?>
+<?php endif; ?>
+For Pagination
+
+				<?php global $wp_query; $total_pages = $wp_query->max_num_pages; if ( $total_pages > 1 ) { ?>
+                <div id="nav-below" class="navigation">
+                    <?php echo paginate_links( array ('prev_text' => '« Newer', 'next_text' => 'Older »','mid_size'=> 1 )); ?>
+                </div><!-- #nav-below -->
+				<?php } ?>
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Image Upload
+
+define(‘UPLOADS’, 'phoenixcleaning/wp-content/uploads');
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Post Show
+
+<a href="<?php echo get_the_permalink();?>"><?php echo get_the_post_thumbnail();?></a>
+                                       <p><?php echo get_the_date( get_option( 'date_format' ) ); ?></p>
+				       <p><?php echo get_the_excerpt();?><a href="<?php echo get_the_permalink();?>">[Read More ...]</a></p>
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Phpmyadmin without cpanel
+
+http://makeaweblog.com/access-phpmyadmin-directly-without-cpanel/
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+User Image for frontend
+
+Plugin Name - WP User Avatar
+
+ short code - [avatar_upload]
+ show user profile - [avatar]
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Convert joomla to wordpress site
+
+ http://www.wpbeginner.com/wp-tutorials/how-to-move-your-site-from-joomla-to-wordpress/
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+INcrease File Size
+
+php_value upload_max_filesize 64M (.htaccess)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+SHortable or drag and drop item
+
+1. https://stackoverflow.com/questions/15633341/jquery-ui-sortable-then-write-order-into-a-database
+2. https://stackoverflow.com/questions/8841371/reordering-database-fields-with-jquery-ui-sortable
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
